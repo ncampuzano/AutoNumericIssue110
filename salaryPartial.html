@@ -1,0 +1,120 @@
+﻿<div class="row">
+    <div class="col-xs-12 col-sm-10 col-lg-8">
+        <div class="form-horizontal" role="form">
+            <div class="form-group">
+                <label for="paymentFrequency" class="col-sm-7 control-label" data-ng-class="{'selected-label' : (paymentFrequency  || (contract.paymentFrequency.name != null && contract.paymentFrequency.name != ''))}">¿Con qué frecuencia le pagas a <span data-ng-if="$parent.employee.firstName != null && $parent.employee.firstName != ''"><span data-ng-bind="$parent.employee.firstName" /></span><span data-ng-if="$parent.employee.firstName == null || $parent.employee.firstName == ''">tu empleado</span>?</label>
+                <div class="col-sm-5 form-item">
+                    <div class="dropdown">
+                        <button class="btn btn-default" data-toggle="dropdown" data-ng-click="paymentFrequency = true; currentQuestion = 'paymentFrequency'" data-ng-class="{selected: (paymentFrequency  || (contract.paymentFrequency.name != null && contract.paymentFrequency.name != ''))}">
+                            <span data-ng-show="nonSelected" data-ng-init="nonSelected = true">Selecciona</span>
+                        <span data-ng-bind="contract.paymentFrequency.name"></span><b class="caret" focus-me></b></button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="paymentFrequencyDropdown" data-ng-class="{selected: (paymentFrequency  || (contract.paymentFrequency.name != null && contract.paymentFrequency.name != ''))}"
+                            data-ng-click="paymentFrequency = true; nonSelected = false">
+                            <li ng-repeat="g in paymentFrequencies">
+                                <a data-ng-bind="g.name" data-ng-click="contract.paymentFrequency = g; paymentFrequency=true; nonSelected = false"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="payDay" class="col-sm-7 control-label" data-ng-class="{'selected-label' : (payDay  || (contract.payDay != null && contract.payDay != ''))}">¿Qué día del mes realizas el pago a <span data-ng-if="$parent.employee.firstName != null && $parent.employee.firstName != ''"><span data-ng-bind="$parent.employee.firstName" /></span><span data-ng-if="$parent.employee.firstName == null || $parent.employee.firstName == ''">tu empleado</span>?</label>
+                <div class="col-sm-5 form-item">
+                    <input type="number" class="form-control" name="payDay" id="payDay" data-ng-class="{selected: (payDay  || (contract.payDay != null && contract.payDay != ''))}" data-ng-focus="payDay = true; currentQuestion = 'payDay'" data-ng-model="contract.payDay" min="1" max="30" autonumeric>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="cashSalary" class="col-sm-7 control-label" data-ng-class="{'selected-label' : (cashSalary  || (contract.cashSalary != null && contract.cashSalary != ''))}">¿Cuál es el salario en efectivo de <span data-ng-if="$parent.employee.firstName != null && $parent.employee.firstName != ''"><span data-ng-bind="$parent.employee.firstName" /></span><span data-ng-if="$parent.employee.firstName == null || $parent.employee.firstName == ''">tu empleado</span>?</label>
+                <div class="col-sm-5 form-item">
+                    <div class="input-group">
+                        <span class="input-group-addon" data-ng-class="{'selected-addon': (cashSalary  || (contract.cashSalary != null && contract.cashSalary != ''))}">$</span>
+                        <input type="text" class="form-control" name="cashSalary" id="cashSalary" data-ng-class="{selected: (cashSalary  || (contract.cashSalary != null && contract.cashSalary != ''))}" data-ng-focus="cashSalary = true; currentQuestion = 'cashSalary'" data-ng-model="contract.cashSalary" autonumeric>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="minimalSalaryCheck" class="col-sm-7 control-label" data-ng-class="{'selected-label': (cashSalary  || (contract.cashSalary != null && contract.cashSalary != ''))}">Usar salario mímino</label>
+                <div class="col-sm-5 form-item">
+                    <input type="checkbox" data-ng-model="$parent.boolMinimalSalary" data-ng-true-value="true" data-ng-false-value="false" data-ng-click="$parent.selectedMinimalSalary()" data-ng-class="{'selected': (cashSalary  || (contract.cashSalary != null && contract.cashSalary != ''))}" name="minimalSalaryCheck" />
+                </div>
+            </div>
+            <div class="form-group" data-ng-show="contract.workingModality.value == 1">
+                <label for="inKindSalary" class="col-sm-7 control-label" data-ng-class="{'selected-label' : (inKindSalary  || (contract.inKindSalary != null && contract.inKindSalary != ''))}">¿Cuál es el salario en especie de <span data-ng-if="$parent.employee.firstName != null && $parent.employee.firstName != ''"><span data-ng-bind="$parent.employee.firstName" /></span><span data-ng-if="$parent.employee.firstName == null || $parent.employee.firstName == ''">tu empleado</span>?</label>
+                <div class="col-sm-5 form-item">
+                    <div class="input-group">
+                        <span class="input-group-addon" data-ng-class="{'selected-addon': (inKindSalary  || (contract.inKindSalary != null && contract.inKindSalary != ''))}">$</span>
+                        <input type="text" class="form-control" name="inKindSalary" id="inKindSalary" data-ng-class="{selected: (inKindSalary  || (contract.inKindSalary != null && contract.inKindSalary != ''))}" data-ng-focus="inKindSalary = true; currentQuestion = 'inKindSalary'" data-ng-model="contract.inKindSalary" autonumeric>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" data-ng-show="$parent.hasOwedVacations">
+                <label for="vacationsOwedPreRegistration" class="col-sm-7 control-label" data-ng-class="{'selected-label' : (vacationsOwedPreRegistration  || (contract.vacationsOwedPreRegistration != null && contract.vacationsOwedPreRegistration != ''))}">¿Le debes vacaciones pasadas a <span data-ng-if="$parent.employee.firstName != null && $parent.employee.firstName != ''"><span data-ng-bind="$parent.employee.firstName" /></span><span data-ng-if="$parent.employee.firstName == null || $parent.employee.firstName == ''">tu empleado</span>? ¿Cuántos días?</label>
+                <div class="col-sm-5 form-item">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="vacationsOwedPreRegistration" id="vacationsOwedPreRegistration" data-ng-class="{selected: (vacationsOwedPreRegistration  || (contract.vacationsOwedPreRegistration != null && contract.vacationsOwedPreRegistration != ''))}" data-ng-focus="vacationsOwedPreRegistration = true; currentQuestion = 'vacationsOwedPreRegistration'" data-ng-model="contract.vacationsOwedPreRegistration" data-ng-change="$parent.verifyMaxDays()">
+                    </div> 
+                    <span  data-ng-bind="$parent.vacationErrorMessage"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="workPlaceDepartmentId" class="col-sm-7 control-label" data-ng-class="{'selected-label' : (workPlaceDepartmentId || (registration.workPlaceDepartmentId != null && registration.workPlaceDepartmentId != ''))}">¿En qué departamento de Colombia trabaja <span data-ng-if="$parent.employee.firstName != null && $parent.employee.firstName != ''"><span data-ng-bind="$parent.employee.firstName" /></span><span data-ng-if="$parent.employee.firstName == null || $parent.employee.firstName == ''">tu empleado</span>?</label>
+                <div class="col-sm-5 form-item">
+                    <select name="workPlaceDepartmentId" id="workPlaceDepartmentId" class="form-control" data-ng-class="{selected: (workPlaceDepartmentId  || (registration.workPlaceDepartmentId != null && registration.workPlaceDepartmentId != ''))}" data-ng-focus="workPlaceDepartmentId = true" data-ng-model="contract.workPlaceDepartmentId" data-ng-change="getCitiesByworkPlaceDepartmentId()" required>
+                        <option data-ng-repeat="workPlaceDepartmentId in departments" value="{{workPlaceDepartmentId.id}}" data-ng-selected="workPlaceDepartmentId.id == '00000000-0000-0000-0000-000000000000'">{{workPlaceDepartmentId.name}}</option>
+                    </select>
+                    <div data-ng-show="form.workPlaceDepartmentId.$dirty">
+                        <span data-ng-show="form.workPlaceDepartmentId.$error.required">Por favor introduce el departamento donde trabaja <span data-ng-if="$parent.employee.firstName != null && $parent.employee.firstName != ''"><span data-ng-bind="$parent.employee.firstName" /></span><span data-ng-if="$parent.employee.firstName == null || $parent.employee.firstName == ''">tu empleado</span>.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="workPlaceCityId" class="col-sm-7 control-label" data-ng-class="{'selected-label' : (workPlaceCityId  || (contract.workPlaceCityId != null && contract.workPlaceCityId != ''))}">¿En qué ciudad trabaja <span data-ng-if="$parent.employee.firstName != null && $parent.employee.firstName != ''"><span data-ng-bind="$parent.employee.firstName" /></span><span data-ng-if="$parent.employee.firstName == null || $parent.employee.firstName == ''">tu empleado</span>?</label>
+                <div class="col-sm-5 form-item">
+                    <select name="workPlaceCityId" id="workPlaceCityId" class="form-control" data-ng-class="{selected: (workPlaceCityId  || (employee.workPlaceCityId != null && employee.workPlaceCityId != ''))}" data-ng-focus="workPlaceCityId = true" data-ng-model="contract.workPlaceCityId" required>
+                        <option data-ng-repeat="city in cities" value="{{city.id}}" data-ng-selected="city.id == '00000000-0000-0000-0000-000000000000'">{{city.name}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-1"></div>
+    <div class="hidden-xs hidden-sm  col-md-2 col-lg-3 register-description">
+        <div data-ng-show="currentQuestion == 'paymentFrequency'">
+            <h4>Frecuencia de pago:</h4>
+            <p>
+                Aquí debes ingresar la frecuenca con la que pagas el sueldo a <span data-ng-show="$parent.employee.firstName == null || $parent.employee.firstName == ''"><span data-ng-if="$parent.employee.firstName != null && $parent.employee.firstName != ''"><span data-ng-bind="$parent.employee.firstName" /></span><span data-ng-if="$parent.employee.firstName == null || $parent.employee.firstName == ''">tu empleado</span></span><span data-ng-bind="$parent.employee.firstName"></span> <span data-ng-bind="$parent.employee.secondName"></span>.
+            </p>
+        </div>
+        <div data-ng-show="currentQuestion == 'payDay'">
+            <h4>Día del pago:</h4>
+            <p>
+                Por favor cuéntanos que día del mes realizas los pagos a <span data-ng-show="$parent.employee.firstName == null || $parent.employee.firstName == ''"><span data-ng-if="$parent.employee.firstName != null && $parent.employee.firstName != ''"><span data-ng-bind="$parent.employee.firstName" /></span><span data-ng-if="$parent.employee.firstName == null || $parent.employee.firstName == ''">tu empleado</span></span><span data-ng-bind="$parent.employee.firstName"></span> <span data-ng-bind="$parent.employee.secondName"></span>.
+            </p>
+        </div>
+        <div data-ng-show="currentQuestion == 'cashSalary'">
+            <h4>Salario en efectivo:</h4>
+            <p>
+                Cuéntanos la cantidad de salario que le corresponde a <span data-ng-show="$parent.employee.firstName == null || $parent.employee.firstName == ''"><span data-ng-if="$parent.employee.firstName != null && $parent.employee.firstName != ''"><span data-ng-bind="$parent.employee.firstName" /></span><span data-ng-if="$parent.employee.firstName == null || $parent.employee.firstName == ''">tu empleado</span></span><span data-ng-bind="$parent.employee.firstName"></span> <span data-ng-bind="$parent.employee.secondName"></span> cada que se cumple un ciclo de pago (diario, mensual, quincenal).
+            </p>
+        </div>
+        <div data-ng-show="currentQuestion == 'inKindSalary'">
+            <h4>Salario en especie:</h4>
+            <p>
+                Debido a que <span data-ng-show="$parent.employee.firstName == null || $parent.employee.firstName == ''"><span data-ng-if="$parent.employee.firstName != null && $parent.employee.firstName != ''"><span data-ng-bind="$parent.employee.firstName" /></span><span data-ng-if="$parent.employee.firstName == null || $parent.employee.firstName == ''">tu empleado</span></span><span data-ng-bind="$parent.employee.firstName"></span> <span data-ng-bind="$parent.employee.secondName"></span> es un empleado interno, hasta el 30% de su salario puede ser en especie, indicanos cuánto es este valor. Si no aplica, déjalo en ceros.
+            </p>
+        </div>
+        <div data-ng-show="currentQuestion == 'vacationsOwedPreRegistration'">
+            <h4>Vacaciones pasadas:</h4>
+            <p>
+                En caso de que debas algunos días de vacaciones a <span data-ng-show="$parent.employee.firstName == null || $parent.employee.firstName == ''"><span data-ng-if="$parent.employee.firstName != null && $parent.employee.firstName != ''"><span data-ng-bind="$parent.employee.firstName" /></span><span data-ng-if="$parent.employee.firstName == null || $parent.employee.firstName == ''">tu empleado</span></span><span data-ng-bind="$parent.employee.firstName"></span> <span data-ng-bind="$parent.employee.secondName"></span> por su trabajo pasado, por favor indícanos cuantos, de lo contrario deja el valor en ceros.
+            </p>
+        </div>
+        <div data-ng-show="currentQuestion == 'workPlaceCityId'">
+            <h4>Ciudad de trabajo:</h4>
+            <p>
+                Cuéntanos dónde se encuentra el lugar de trabajo de <span data-ng-show="$parent.employee.firstName == null || $parent.employee.firstName == ''"><span data-ng-if="$parent.employee.firstName != null && $parent.employee.firstName != ''"><span data-ng-bind="$parent.employee.firstName" /></span><span data-ng-if="$parent.employee.firstName == null || $parent.employee.firstName == ''">tu empleado</span></span><span data-ng-bind="$parent.employee.firstName"></span><span data-ng-bind="$parent.employee.secondName"></span>.
+            </p>
+        </div>
+    </div>
+</div>
