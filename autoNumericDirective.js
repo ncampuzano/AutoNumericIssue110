@@ -1,5 +1,5 @@
 ﻿'use strict';
-angular.module('nominapp.directives.autoNumeric').directive('autonumeric', [function () {
+angular.module('autoNumericDirective', []).directive('autonumeric', [function () {
     // Declare a empty options object
     var options = { aSep: '.', aDec: ',', mDec: 0 };     
     return {
