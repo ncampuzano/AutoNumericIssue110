@@ -1,1 +1,1 @@
-var app = angular.module('Issue110', ['autoNumericDirective']);
+var app = angular.module('Issue110', ['autoNumericDirective', 'Issue110.properties']);

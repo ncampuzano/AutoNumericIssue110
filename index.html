@@ -3,16 +3,18 @@
 <head>
     <title>Issue 110</title>
 </head>
-<body data-ng-app="Issue110">
-
+<body ng-app="Issue110">
+<div ng-controller="propertiesController">
+	<input type="text" ng-model="cash" autonumeric>
     <input type="text" autonumeric>
-    <input type="text" autonumeric>
-
+</div>
+   
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
     <script src="http://rawgit.com/BobKnothe/autoNumeric/master/autoNumeric.js"></script>
 	<script src="app.js"></script>
 	<script src="autoNumericDirective.js"></script>
+	<script src="properties.js"></script>
 
     </body>
 </html>
